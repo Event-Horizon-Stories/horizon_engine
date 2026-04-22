@@ -1,9 +1,10 @@
 # Lesson 05: The Pre-Origin Model
 
-The entire code path from lesson 4 survives into the finale.
-This chapter adds one last layer instead of replacing anything.
+In lesson 4, the Horizon Engine learned how to name gaps in the trace honestly.
 
-The series now has a fully cumulative event-sourcing ladder: projections, replay, gap inference, and finally pre-origin completion.
+In lesson 5, it learns that new events can change the meaning of the beginning without rewriting the beginning itself.
+
+Interactive companion: [`../livebooks/05_pre_origin_model.livemd`](../livebooks/05_pre_origin_model.livemd)
 
 ## What You'll Learn
 
@@ -39,24 +40,12 @@ That means the interpretation of the past can change even when the past records 
 
 ## What We're Building
 
-We are keeping the chapter 4 pieces:
-
-- the event store
-- the snapshot projection
-- the timeline projection
-- structure emergence
-- the causality graph
-- the anomaly detector
-- replay
-- contradiction detection
-- the gap scanner
-- the inference projector
-
-Then we add:
+We will build:
 
 - a dependency analyzer for unresolved pre-origin references
 - a completion step that appends a new anchor event
 - a projection that reinterprets the beginning as continuation
+- a lesson trace that still works with the earlier gap, replay, and projection tools
 
 ## The Code
 
@@ -76,6 +65,45 @@ This lesson lives in:
 - [`lib/pre_origin_model/horizon_completer.ex`](./lib/pre_origin_model/horizon_completer.ex)
 - [`lib/pre_origin_model/pre_origin_projection.ex`](./lib/pre_origin_model/pre_origin_projection.ex)
 - [`test/pre_origin_model_test.exs`](./test/pre_origin_model_test.exs)
+
+Core pieces:
+
+```elixir
+defmodule PreOriginModel.DependencyAnalyzer do
+  def project(events) do
+    known_ids =
+      events
+      |> Enum.map(&get_in(&1, [:attributes, :id]))
+      |> MapSet.new()
+
+    events
+    |> Enum.flat_map(fn event ->
+      dependency = get_in(event, [:attributes, :depends_on])
+
+      cond do
+        is_nil(dependency) -> []
+        MapSet.member?(known_ids, dependency) -> []
+        true -> [%{event_id: get_in(event, [:attributes, :id]), missing_dependency: dependency}]
+      end
+    end)
+  end
+end
+```
+
+```elixir
+defmodule PreOriginModel.HorizonCompleter do
+  def complete(events) do
+    DependencyAnalyzer.project(events)
+    |> Enum.reduce(events, fn dependency, acc ->
+      EventStore.append(acc, :pre_origin_anchor_inferred, -1, %{
+        id: dependency.missing_dependency,
+        emitted_by: "horizon-engine",
+        resolves_future_event: dependency.event_id
+      })
+    end)
+  end
+end
+```
 
 ## Trying It Out
 
@@ -98,14 +126,13 @@ PreOriginModel.PreOriginProjection.project(completed)
 
 ## What the Tests Prove
 
-The test in [`test/pre_origin_model_test.exs`](./test/pre_origin_model_test.exs) proves the full cumulative story:
+The test in [`test/pre_origin_model_test.exs`](./test/pre_origin_model_test.exs) proves the final move:
 
-- the gap layer from lesson 4 still works
-- the older projections still work on the extended trace
 - the engine can append a new pre-origin anchor event
+- the gap and projection layers from earlier lessons still work
 - the meaning of the beginning changes without rewriting any earlier event
 
-That is the final event-sourcing move in the series.
+That is the deepest event-sourcing turn in the series.
 
 ## Why This Matters
 
@@ -113,6 +140,13 @@ The log remains the only truth surface, but the meaning of the past is still ali
 
 That is why event sourcing fits this story so well:
 history stays immutable while understanding keeps changing.
+
+## Event Sourcing Takeaway
+
+New events can change the interpretation of old history without mutating the old records.
+
+That is the deepest event-sourcing move in the series:
+immutability and reinterpretation are not opposites. They are partners.
 
 ## What Still Hurts
 

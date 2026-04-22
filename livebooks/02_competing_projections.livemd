@@ -1,0 +1,33 @@
+# Lesson 02 Livebook: Competing Projections
+
+This notebook keeps the lesson 1 event log and adds several projections over the same history.
+
+```elixir
+Mix.install([
+  {:competing_projections, path: "../02_competing_projections"}
+])
+```
+
+## Load The Shared Trace
+
+```elixir
+events = CompetingProjections.sample_trace()
+```
+
+## Compare The Projections
+
+```elixir
+%{
+  snapshot: CompetingProjections.UniverseSnapshot.project(events),
+  timeline: CompetingProjections.CosmicTimeline.project(events),
+  structure: CompetingProjections.StructureEmergence.project(events),
+  causality: CompetingProjections.CausalityGraph.project(events),
+  anomalies: CompetingProjections.AnomalyDetector.project(events)
+}
+```
+
+## Focus On The Anomalies
+
+```elixir
+CompetingProjections.AnomalyDetector.project(events)
+```

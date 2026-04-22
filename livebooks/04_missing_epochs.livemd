@@ -1,0 +1,38 @@
+# Lesson 04 Livebook: Missing Epochs
+
+This notebook keeps the replay stack and adds explicit handling for gaps in the trace.
+
+```elixir
+Mix.install([
+  {:missing_epochs, path: "../04_missing_epochs"}
+])
+```
+
+## Load The Gapped Trace
+
+```elixir
+events = MissingEpochs.sample_trace()
+```
+
+## Inspect The Existing Views
+
+```elixir
+%{
+  timeline: MissingEpochs.CosmicTimeline.project(events),
+  structure: MissingEpochs.StructureEmergence.project(events),
+  causality: MissingEpochs.CausalityGraph.project(events),
+  replay: MissingEpochs.Replayer.replay(events)
+}
+```
+
+## Detect The Gaps
+
+```elixir
+MissingEpochs.GapScanner.project(events)
+```
+
+## Project Inferred Missing Events
+
+```elixir
+MissingEpochs.InferenceProjector.project(events)
+```

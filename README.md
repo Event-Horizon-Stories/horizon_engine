@@ -1,6 +1,6 @@
 # horizon_engine
 
-`horizon_engine` teaches event sourcing through a science-fiction investigation called **The Origin Inquiry**.
+`horizon_engine` teaches event sourcing through **The Origin Inquiry**, an investigation into how the universe began.
 
 A distant civilization discovers that background radiation behaves like corrupted telemetry. The working assumption becomes unbearable:
 
@@ -14,6 +14,16 @@ Everything is treated as events.
 
 Like `jido_class`, this is meant to read as one continuous journey.
 The same investigation advances one pressure point at a time, and each chapter begins with whatever the previous chapter failed to explain.
+
+## Interactive Companions
+
+Livebook companions for the full series live in [`livebooks/`](./livebooks/README.md).
+
+- [`livebooks/01_observation_log.livemd`](./livebooks/01_observation_log.livemd)
+- [`livebooks/02_competing_projections.livemd`](./livebooks/02_competing_projections.livemd)
+- [`livebooks/03_first_replay.livemd`](./livebooks/03_first_replay.livemd)
+- [`livebooks/04_missing_epochs.livemd`](./livebooks/04_missing_epochs.livemd)
+- [`livebooks/05_pre_origin_model.livemd`](./livebooks/05_pre_origin_model.livemd)
 
 ## The Journey
 

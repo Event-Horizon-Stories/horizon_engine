@@ -1,9 +1,10 @@
 # Lesson 03: The First Replay
 
-The projections survive from lesson 2.
-Now replay itself becomes unstable.
+In lesson 2, the Horizon Engine learned how to project several interpretations from the same history.
 
-This chapter is cumulative: the snapshot, timeline, structure view, causality graph, and anomaly detector are still present before the replay layer is added.
+In lesson 3, it learns that replay does not guarantee certainty.
+
+Interactive companion: [`../livebooks/03_first_replay.livemd`](../livebooks/03_first_replay.livemd)
 
 ## What You'll Learn
 
@@ -37,19 +38,11 @@ If the source is ambiguous, replay becomes ambiguous too.
 
 ## What We're Building
 
-We are keeping the chapter 2 pieces:
-
-- the event store
-- the snapshot projection
-- the timeline projection
-- structure emergence
-- the causality graph
-- the anomaly detector
-
-Then we add:
+We will build:
 
 - a replay engine that can branch into multiple candidate timelines
 - a contradiction detector for mutually exclusive events at the same tick
+- a lesson trace that still supports the earlier projections
 
 ## The Code
 
@@ -64,6 +57,44 @@ This lesson lives in:
 - [`lib/first_replay/replayer.ex`](./lib/first_replay/replayer.ex)
 - [`lib/first_replay/contradiction_detector.ex`](./lib/first_replay/contradiction_detector.ex)
 - [`test/first_replay_test.exs`](./test/first_replay_test.exs)
+
+Core pieces:
+
+```elixir
+defmodule FirstReplay.Replayer do
+  def replay(events) do
+    grouped = Enum.group_by(events, & &1.tick)
+    ticks = grouped |> Map.keys() |> Enum.sort()
+
+    Enum.reduce(ticks, [[]], fn tick, candidate_timelines ->
+      grouped
+      |> Map.fetch!(tick)
+      |> expand_tick(candidate_timelines)
+    end)
+    |> Enum.map(&Enum.map(&1, fn event -> %{tick: event.tick, type: event.type} end))
+  end
+end
+```
+
+```elixir
+defmodule FirstReplay.ContradictionDetector do
+  def project(events) do
+    events
+    |> Enum.group_by(& &1.tick)
+    |> Enum.flat_map(fn {tick, events_at_tick} ->
+      types = events_at_tick |> Enum.map(& &1.type) |> Enum.sort()
+
+      case types do
+        [:collapse_measured, :expansion_measured] ->
+          [%{tick: tick, conflicting_types: types}]
+
+        _ ->
+          []
+      end
+    end)
+  end
+end
+```
 
 ## Trying It Out
 
@@ -88,10 +119,10 @@ FirstReplay.ContradictionDetector.project(events)
 
 The test in [`test/first_replay_test.exs`](./test/first_replay_test.exs) proves two things at once:
 
-- the older projections still work on the expanded chapter 3 event stream
 - replay can legitimately produce more than one candidate history when the source contains contradictions
+- the earlier projections still remain useful even after replay becomes ambiguous
 
-That matters because the code is now cumulative in the same way the story is cumulative.
+That matters because replay is not replacing the earlier lesson. It is deepening it.
 
 ## Why This Matters
 
@@ -99,6 +130,12 @@ Replay is one of the most powerful ideas in event sourcing, but it is not magic.
 
 It does not manufacture certainty.
 It only reveals what the log can honestly sustain.
+
+## Event Sourcing Takeaway
+
+Replay is not a promise that the past will become clean.
+
+Replay is a way to ask the log, as honestly as possible, what histories it can still support.
 
 ## What Still Hurts
 

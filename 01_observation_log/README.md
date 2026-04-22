@@ -5,6 +5,8 @@ The Horizon Engine begins with one discipline:
 do not store what the universe is.
 store only what the universe appears to have done.
 
+Interactive companion: [`../livebooks/01_observation_log.livemd`](../livebooks/01_observation_log.livemd)
+
 ## What You'll Learn
 
 - why event sourcing starts with an append-only history
@@ -54,6 +56,38 @@ This lesson lives in:
 - [`lib/observation_log/universe_snapshot.ex`](./lib/observation_log/universe_snapshot.ex)
 - [`test/observation_log_test.exs`](./test/observation_log_test.exs)
 
+Core pieces:
+
+```elixir
+defmodule ObservationLog.EventStore do
+  def append(events, type, attributes, opts \\ []) when is_list(events) and is_atom(type) do
+    sequence = length(events)
+
+    event = %{
+      sequence: sequence,
+      type: type,
+      observed_at: Keyword.get(opts, :observed_at, sequence),
+      attributes: Map.new(attributes)
+    }
+
+    events ++ [event]
+  end
+end
+```
+
+```elixir
+defmodule ObservationLog.UniverseSnapshot do
+  def project(events) do
+    %{
+      event_count: length(events),
+      first_light?: Enum.any?(events, &(&1.type == :particle_emitted)),
+      structure_possible?: structure_possible?(events),
+      last_observed_sequence: last_sequence(events)
+    }
+  end
+end
+```
+
 ## Trying It Out
 
 ```bash
@@ -88,6 +122,15 @@ That matters because every later chapter depends on this rule staying true.
 Event sourcing only becomes trustworthy when the log remains simpler than the interpretations built on top of it.
 
 If the team discovers a better cosmology later, they do not need to rewrite the past. They only need a better projection.
+
+## Event Sourcing Takeaway
+
+The first event-sourcing rule is simple:
+
+store history first.
+derive state second.
+
+If the stored record already contains interpretation, the system loses the ability to rethink the past honestly.
 
 ## What Still Hurts
 

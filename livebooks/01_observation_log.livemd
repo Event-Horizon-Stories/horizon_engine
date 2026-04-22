@@ -1,0 +1,46 @@
+# Lesson 01 Livebook: The Observation Log
+
+This notebook stays focused on the first event sourcing rule:
+
+store history first.
+derive state second.
+
+```elixir
+Mix.install([
+  {:observation_log, path: "../01_observation_log"}
+])
+```
+
+## Load The First Trace
+
+```elixir
+events = ObservationLog.sample_trace()
+```
+
+## Project A Timeline
+
+```elixir
+ObservationLog.CosmicTimeline.project(events)
+```
+
+## Project A Snapshot
+
+```elixir
+ObservationLog.UniverseSnapshot.project(events)
+```
+
+## Append One More Observation
+
+```elixir
+expanded_events =
+  ObservationLog.EventStore.append(
+    events,
+    :particle_emitted,
+    %{particle: "echo-seed", energy: 21}
+  )
+
+%{
+  timeline: ObservationLog.CosmicTimeline.project(expanded_events),
+  snapshot: ObservationLog.UniverseSnapshot.project(expanded_events)
+}
+```

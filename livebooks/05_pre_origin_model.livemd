@@ -1,0 +1,42 @@
+# Lesson 05 Livebook: The Pre-Origin Model
+
+This notebook keeps the full event-sourcing stack and adds a pre-origin completion step.
+
+```elixir
+Mix.install([
+  {:pre_origin_model, path: "../05_pre_origin_model"}
+])
+```
+
+## Load The Final Trace
+
+```elixir
+events = PreOriginModel.sample_trace()
+```
+
+## Inspect The Gap And Dependency Layers
+
+```elixir
+%{
+  gaps: PreOriginModel.GapScanner.project(events),
+  inferred: PreOriginModel.InferenceProjector.project(events),
+  dependencies: PreOriginModel.DependencyAnalyzer.project(events)
+}
+```
+
+## Complete The Trace
+
+```elixir
+completed_events = PreOriginModel.HorizonCompleter.complete(events)
+```
+
+## Reinterpret The Beginning
+
+```elixir
+%{
+  timeline: PreOriginModel.CosmicTimeline.project(completed_events),
+  replay: PreOriginModel.Replayer.replay(completed_events),
+  anomalies: PreOriginModel.AnomalyDetector.project(completed_events),
+  pre_origin: PreOriginModel.PreOriginProjection.project(completed_events)
+}
+```

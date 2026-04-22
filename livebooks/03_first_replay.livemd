@@ -1,0 +1,39 @@
+# Lesson 03 Livebook: The First Replay
+
+This notebook keeps the earlier projections and adds replay branching when the trace becomes contradictory.
+
+```elixir
+Mix.install([
+  {:first_replay, path: "../03_first_replay"}
+])
+```
+
+## Load The Contradictory Trace
+
+```elixir
+events = FirstReplay.sample_trace()
+```
+
+## Inspect The Older Projections
+
+```elixir
+%{
+  snapshot: FirstReplay.UniverseSnapshot.project(events),
+  timeline: FirstReplay.CosmicTimeline.project(events),
+  structure: FirstReplay.StructureEmergence.project(events),
+  causality: FirstReplay.CausalityGraph.project(events),
+  anomalies: FirstReplay.AnomalyDetector.project(events)
+}
+```
+
+## Replay The Origin Candidates
+
+```elixir
+FirstReplay.Replayer.replay(events)
+```
+
+## Detect The Contradiction
+
+```elixir
+FirstReplay.ContradictionDetector.project(events)
+```

@@ -1,9 +1,10 @@
 # Lesson 04: Missing Epochs
 
-The replay and projection stack survives from lesson 3.
-This chapter adds a way to model absence honestly.
+In lesson 3, the Horizon Engine learned that replay can branch when the source history is contradictory.
 
-The code is cumulative: nothing from the earlier lessons is removed. We add gap handling on top of the existing event-sourcing surface.
+In lesson 4, it learns how to reason about history that is not contradictory, but missing.
+
+Interactive companion: [`../livebooks/04_missing_epochs.livemd`](../livebooks/04_missing_epochs.livemd)
 
 ## What You'll Learn
 
@@ -37,21 +38,11 @@ That is very different from silently hiding the gap behind a snapshot.
 
 ## What We're Building
 
-We are keeping the chapter 3 pieces:
-
-- the event store
-- the snapshot projection
-- the timeline projection
-- structure emergence
-- the causality graph
-- the anomaly detector
-- replay
-- contradiction detection
-
-Then we add:
+We will build:
 
 - a gap scanner
 - an inference projector for missing epochs
+- a lesson trace that can still be read by the earlier projections and replay tools
 
 ## The Code
 
@@ -68,6 +59,42 @@ This lesson lives in:
 - [`lib/missing_epochs/gap_scanner.ex`](./lib/missing_epochs/gap_scanner.ex)
 - [`lib/missing_epochs/inference_projector.ex`](./lib/missing_epochs/inference_projector.ex)
 - [`test/missing_epochs_test.exs`](./test/missing_epochs_test.exs)
+
+Core pieces:
+
+```elixir
+defmodule MissingEpochs.GapScanner do
+  def project(events) do
+    ticks = Enum.map(events, & &1.tick)
+
+    ticks
+    |> Enum.sort()
+    |> Enum.chunk_every(2, 1, :discard)
+    |> Enum.flat_map(fn [left, right] ->
+      if right - left > 1 do
+        [%{from_tick: left + 1, to_tick: right - 1}]
+      else
+        []
+      end
+    end)
+  end
+end
+```
+
+```elixir
+defmodule MissingEpochs.InferenceProjector do
+  def project(events) do
+    inferred_events =
+      events
+      |> GapScanner.project()
+      |> Enum.flat_map(&expand_gap(&1, events))
+
+    (events ++ inferred_events)
+    |> Enum.sort_by(fn event -> {event.tick, inferred_rank(event)} end)
+    |> Enum.map(&normalize/1)
+  end
+end
+```
 
 ## Trying It Out
 
@@ -90,18 +117,24 @@ MissingEpochs.InferenceProjector.project(events)
 
 ## What the Tests Prove
 
-The test in [`test/missing_epochs_test.exs`](./test/missing_epochs_test.exs) proves two cumulative properties:
+The test in [`test/missing_epochs_test.exs`](./test/missing_epochs_test.exs) proves two things:
 
-- the older projections and replay layer still work on the new chapter 4 trace
 - the new gap layer can distinguish between plausible silence and likely erasure
+- the earlier projections and replay layer still remain useful on the same trace
 
-That matters because the series is not resetting the design. It is extending it.
+That matters because the reader can see uncertainty become part of the model instead of a reason to throw the model away.
 
 ## Why This Matters
 
 Good event-sourced systems do not erase uncertainty just because uncertainty is inconvenient.
 
 If history is missing, the model should say so directly.
+
+## Event Sourcing Takeaway
+
+Sometimes the right read model is not a confident answer.
+
+Sometimes the right read model is an explicit statement that the history is incomplete, damaged, or only partially inferable.
 
 ## What Still Hurts
 
