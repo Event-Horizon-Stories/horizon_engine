@@ -37,12 +37,19 @@ HorizonEngine.GapScanner.project(events)
 inferred_events = HorizonEngine.InferenceProjector.project(events)
 ```
 
+## Inspect Only The Inferred Events
+
+```elixir
+Enum.filter(inferred_events, &match?(%{type: :inferred_missing_event}, &1))
+```
+
 ## Re-run The Existing Views On The Inferred Timeline
 
 ```elixir
 %{
   timeline: HorizonEngine.CosmicTimeline.project(inferred_events),
   causality: HorizonEngine.CausalityGraph.project(inferred_events),
-  replay: HorizonEngine.Replayer.replay(inferred_events)
+  replay: HorizonEngine.Replayer.replay(inferred_events),
+  snapshot: HorizonEngine.UniverseSnapshot.project(inferred_events)
 }
 ```

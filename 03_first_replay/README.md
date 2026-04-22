@@ -38,8 +38,11 @@ This lesson is about replay as discovery rather than certainty.
 Event sourcing often gets summarized as "just replay the events."
 That is incomplete.
 
-Replay can only expose what the event history can support.
-If the source is ambiguous, replay becomes ambiguous too.
+In this chapter:
+
+- replay walks the stored events to rebuild possible histories
+- contradictions in the source stream produce branching candidates
+- the log stays immutable even when the replay result is no longer singular
 
 ## What We're Building
 
@@ -117,8 +120,11 @@ iex -S mix
 
 ```elixir
 events = HorizonEngine.sample_trace()
-HorizonEngine.Replayer.replay(events)
-HorizonEngine.ContradictionDetector.project(events)
+
+%{
+  replay_candidates: HorizonEngine.Replayer.replay(events),
+  contradictions: HorizonEngine.ContradictionDetector.project(events)
+}
 ```
 
 ## What the Tests Prove

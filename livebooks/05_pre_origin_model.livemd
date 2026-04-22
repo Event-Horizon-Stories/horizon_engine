@@ -32,6 +32,17 @@ inferred_events = HorizonEngine.InferenceProjector.project(events)
 completed_events = HorizonEngine.HorizonCompleter.complete(inferred_events)
 ```
 
+## See What Changed Without Rewriting The Old Trace
+
+```elixir
+%{
+  original_event_count: length(events),
+  completed_event_count: length(completed_events),
+  appended_anchor: List.last(completed_events),
+  original_events_still_present?: Enum.take(completed_events, length(inferred_events)) == inferred_events
+}
+```
+
 ## Reinterpret The Beginning
 
 ```elixir

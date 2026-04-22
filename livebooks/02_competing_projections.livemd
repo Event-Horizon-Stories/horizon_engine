@@ -17,7 +17,7 @@ events = HorizonEngine.sample_trace()
 ## Compare The Projections
 
 ```elixir
-%{
+views = %{
   snapshot: HorizonEngine.UniverseSnapshot.project(events),
   timeline: HorizonEngine.CosmicTimeline.project(events),
   structure: HorizonEngine.StructureEmergence.project(events),
@@ -26,8 +26,22 @@ events = HorizonEngine.sample_trace()
 }
 ```
 
+## Compare One Event Across Views
+
+```elixir
+[_, _, raw_event | _] = events
+[_, _, timeline_entry | _] = views.timeline
+
+%{
+  raw_event: raw_event,
+  timeline_entry: timeline_entry,
+  causality_for_e3: views.causality["e3"],
+  structure_projection: views.structure
+}
+```
+
 ## Focus On The Anomalies
 
 ```elixir
-HorizonEngine.AnomalyDetector.project(events)
+views.anomalies
 ```

@@ -39,7 +39,11 @@ This lesson is about late-arriving meaning.
 In event sourcing, new events do not rewrite old ones.
 They extend the history.
 
-That means the interpretation of the past can change even when the past records remain immutable.
+In this chapter:
+
+- the dependency analyzer finds references to causes that are not yet in the log
+- the completion step appends a new event instead of patching an old one
+- rebuilding projections over the longer history changes the meaning of the beginning
 
 ## What We're Building
 
@@ -129,7 +133,13 @@ completed =
   |> HorizonEngine.InferenceProjector.project()
   |> HorizonEngine.HorizonCompleter.complete()
 
-HorizonEngine.PreOriginProjection.project(completed)
+pre_origin = HorizonEngine.PreOriginProjection.project(completed)
+
+%{
+  timeline: HorizonEngine.CosmicTimeline.project(completed),
+  anchors: pre_origin.anchors,
+  origin_window: pre_origin.origin_window
+}
 ```
 
 ## What the Tests Prove

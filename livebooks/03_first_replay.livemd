@@ -29,7 +29,18 @@ events = HorizonEngine.sample_trace()
 ## Replay The Origin Candidates
 
 ```elixir
-HorizonEngine.Replayer.replay(events)
+replay_candidates = HorizonEngine.Replayer.replay(events)
+```
+
+## Compare The Branches
+
+```elixir
+[first_candidate, second_candidate] = replay_candidates
+
+%{
+  first_candidate: first_candidate,
+  second_candidate: second_candidate
+}
 ```
 
 ## Detect The Contradiction

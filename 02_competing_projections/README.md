@@ -39,8 +39,11 @@ This lesson is about projection fan-out.
 Event sourcing is not useful because it gives you one perfect state view.
 It is useful because one durable event history can support many read models with different purposes.
 
-The write model stays narrow.
-The read model grows.
+In this chapter:
+
+- the write side stays narrow and only captures events
+- each projection answers a different question about the same history
+- adding a new read model does not require changing the stored events
 
 ## What We're Building
 
@@ -119,9 +122,14 @@ iex -S mix
 
 ```elixir
 events = HorizonEngine.sample_trace()
-HorizonEngine.UniverseSnapshot.project(events)
-HorizonEngine.StructureEmergence.project(events)
-HorizonEngine.AnomalyDetector.project(events)
+
+%{
+  snapshot: HorizonEngine.UniverseSnapshot.project(events),
+  timeline: HorizonEngine.CosmicTimeline.project(events),
+  structure: HorizonEngine.StructureEmergence.project(events),
+  causality: HorizonEngine.CausalityGraph.project(events),
+  anomalies: HorizonEngine.AnomalyDetector.project(events)
+}
 ```
 
 ## What the Tests Prove

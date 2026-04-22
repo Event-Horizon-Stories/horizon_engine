@@ -41,7 +41,11 @@ This lesson is about inferred events.
 In event-sourced systems, not every useful record is a directly observed fact.
 Sometimes the correct move is to append or project a visibly inferred placeholder so uncertainty stays explicit.
 
-That is very different from silently hiding the gap behind a snapshot.
+In this chapter:
+
+- the gap scanner finds missing intervals in the recovered history
+- the inference projector adds clearly marked placeholders instead of fake certainty
+- later projections can keep working because the inferred events preserve their provenance
 
 ## What We're Building
 
@@ -121,9 +125,13 @@ iex -S mix
 events = HorizonEngine.sample_trace()
 inferred_events = HorizonEngine.InferenceProjector.project(events)
 
-HorizonEngine.GapScanner.project(events)
-HorizonEngine.CosmicTimeline.project(inferred_events)
-HorizonEngine.Replayer.replay(inferred_events)
+%{
+  gaps: HorizonEngine.GapScanner.project(events),
+  inferred_only:
+    Enum.filter(inferred_events, &match?(%{type: :inferred_missing_event}, &1)),
+  timeline: HorizonEngine.CosmicTimeline.project(inferred_events),
+  replay: HorizonEngine.Replayer.replay(inferred_events)
+}
 ```
 
 ## What the Tests Prove

@@ -17,6 +17,12 @@ Mix.install([
 events = HorizonEngine.sample_trace()
 ```
 
+## Inspect The Raw Events
+
+```elixir
+events
+```
+
 ## Project A Timeline
 
 ```elixir

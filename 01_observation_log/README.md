@@ -42,9 +42,11 @@ This lesson is about the basic event sourcing contract:
 history is the durable truth surface.
 state is a derived view of that history.
 
-The stored records are raw events such as `fluctuation_detected`, `particle_emitted`, and `symmetry_broken`.
+In this chapter:
 
-The useful view of the universe is reconstructed later by replaying those events into a projection.
+- the event store keeps raw records such as `fluctuation_detected`, `particle_emitted`, and `symmetry_broken`
+- the timeline and snapshot are projections rebuilt from those records
+- the projection can change later without mutating the stored history
 
 ## What We're Building
 
@@ -111,6 +113,7 @@ iex -S mix
 
 ```elixir
 events = HorizonEngine.sample_trace()
+events
 HorizonEngine.CosmicTimeline.project(events)
 HorizonEngine.UniverseSnapshot.project(events)
 ```
