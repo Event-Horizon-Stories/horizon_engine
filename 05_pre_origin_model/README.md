@@ -1,12 +1,18 @@
 # Lesson 05: The Pre-Origin Model
 
-In lesson 4, the Horizon Engine learned how to name gaps in the trace honestly.
+The Horizon Engine can now name contradictions and gaps without pretending either problem has been solved.
 
-In lesson 5, it learns that new events can change the meaning of the beginning without rewriting the beginning itself.
+That should be enough to stabilize the investigation.
+
+Instead, the remaining events start doing something impossible: they depend on causes that do not belong in the recovered history at all.
+
+This final lesson is where event sourcing becomes genuinely unsettling. The system does not rewrite the beginning. It appends a new event in the present that changes what the beginning means.
 
 Interactive companion: [`../livebooks/05_pre_origin_model.livemd`](../livebooks/05_pre_origin_model.livemd)
 
 ## What You'll Learn
+
+By the end of this lesson, you should understand:
 
 - how newly appended events can reinterpret old history without mutating it
 - why event sourcing allows meaning to change while records remain immutable
@@ -14,11 +20,7 @@ Interactive companion: [`../livebooks/05_pre_origin_model.livemd`](../livebooks/
 
 ## The Story
 
-At the end of lesson 4, the team could finally name missing epochs honestly.
-
-That should have stabilized the inquiry.
-
-Instead, some surviving events start depending on a cause that does not belong in the gap at all.
+Some surviving events start depending on a cause that does not belong in the gap at all.
 It belongs before the beginning.
 
 An analyst proposes the Pre-Origin Model:

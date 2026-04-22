@@ -1,12 +1,18 @@
 # Lesson 03: The First Replay
 
-In lesson 2, the Horizon Engine learned how to project several interpretations from the same history.
+The Horizon Engine can now produce several interpretations from the same source trace.
 
-In lesson 3, it learns that replay does not guarantee certainty.
+That progress creates a dangerous temptation: to believe that enough projections will eventually collapse the investigation into one clean beginning.
+
+This lesson breaks that illusion.
+
+When the operators replay the earliest surviving slice of the origin trace, the contradiction is not in the tooling. It is in the source.
 
 Interactive companion: [`../livebooks/03_first_replay.livemd`](../livebooks/03_first_replay.livemd)
 
 ## What You'll Learn
+
+By the end of this lesson, you should understand:
 
 - how replay exposes uncertainty already present in the log
 - why contradictory events can produce multiple valid timelines
@@ -14,9 +20,7 @@ Interactive companion: [`../livebooks/03_first_replay.livemd`](../livebooks/03_f
 
 ## The Story
 
-At the end of lesson 2, the team had several useful projections and a growing confidence that the trace could support real cosmology work.
-
-Then they replayed the earliest readable slice of the origin log.
+The team isolates the earliest readable slice of the origin log and runs the first serious replay.
 
 At the same recovered moment, the trace claims two incompatible things:
 

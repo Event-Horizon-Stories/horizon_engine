@@ -1,12 +1,18 @@
 # Lesson 02: Competing Projections
 
-In lesson 1, the Horizon Engine learned how to keep a trustworthy event log.
+The Horizon Engine can already store raw observations without corrupting them with interpretation.
 
-In lesson 2, it learns how to read that same history in more than one way.
+That is necessary, but it is not yet useful enough.
+
+An event log by itself is only a record of what was seen. The real investigative work begins when different teams start asking different questions of the same history and discover that one timeline is not the same thing as one meaning.
+
+This lesson turns the log into something the inquiry can actually work with: a set of projections that read the same events and tell different stories.
 
 Interactive companion: [`../livebooks/02_competing_projections.livemd`](../livebooks/02_competing_projections.livemd)
 
 ## What You'll Learn
+
+By the end of this lesson, you should understand:
 
 - how one event stream can support several read models
 - why projections are interpretations rather than truth
@@ -14,11 +20,9 @@ Interactive companion: [`../livebooks/02_competing_projections.livemd`](../liveb
 
 ## The Story
 
-At the end of lesson 1, the team could safely store observations and replay one basic timeline.
+The first Horizon Engine operators quickly discover that a trustworthy log does not answer any questions on its own.
 
-That solved the trust problem, but not the inquiry.
-
-Now the Horizon Engine team needs to answer several different questions:
+The inquiry now needs to answer several different questions:
 
 - what happened, in order?
 - when does structure begin to emerge?

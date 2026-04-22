@@ -1,5 +1,13 @@
 # Lesson 01: The Observation Log
 
+The Horizon Engine does not begin with a theory of creation.
+
+It begins with damaged evidence.
+
+The background radiation archive is full of patterns that look less like natural noise and more like broken telemetry. Before anyone can explain what the universe is, they first need a way to record what it appears to have done.
+
+This opening lesson is intentionally small. The goal is not to explain cosmology. The goal is to establish the first event sourcing habit the rest of the series depends on.
+
 The Horizon Engine begins with one discipline:
 
 do not store what the universe is.
@@ -8,6 +16,8 @@ store only what the universe appears to have done.
 Interactive companion: [`../livebooks/01_observation_log.livemd`](../livebooks/01_observation_log.livemd)
 
 ## What You'll Learn
+
+By the end of this lesson, you should understand:
 
 - why event sourcing starts with an append-only history
 - how projections reconstruct state instead of persisting it directly

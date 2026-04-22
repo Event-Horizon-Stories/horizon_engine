@@ -1,12 +1,18 @@
 # Lesson 04: Missing Epochs
 
-In lesson 3, the Horizon Engine learned that replay can branch when the source history is contradictory.
+The Horizon Engine has already survived its first contradiction.
 
-In lesson 4, it learns how to reason about history that is not contradictory, but missing.
+That should have made the inquiry harder. Instead, it revealed a worse problem.
+
+Contradictions are at least visible. Gaps are harder. A contradiction tells you two things cannot both be true. A missing epoch leaves you unsure whether anything happened at all.
+
+This lesson teaches the system how to treat absence as part of the model instead of a blank space the reader is expected to ignore.
 
 Interactive companion: [`../livebooks/04_missing_epochs.livemd`](../livebooks/04_missing_epochs.livemd)
 
 ## What You'll Learn
+
+By the end of this lesson, you should understand:
 
 - why missing history is different from empty history
 - how to represent inferred events without pretending they were observed
@@ -14,9 +20,9 @@ Interactive companion: [`../livebooks/04_missing_epochs.livemd`](../livebooks/04
 
 ## The Story
 
-At the end of lesson 3, the team had already learned that replay could branch into multiple timelines.
+The recovered trace does not merely contradict itself.
 
-Then they found a different kind of failure.
+It also disappears.
 
 The trace jumps from tick `1` to tick `4`.
 
