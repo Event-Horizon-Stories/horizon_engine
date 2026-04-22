@@ -34,5 +34,15 @@ MissingEpochs.GapScanner.project(events)
 ## Project Inferred Missing Events
 
 ```elixir
-MissingEpochs.InferenceProjector.project(events)
+inferred_events = MissingEpochs.InferenceProjector.project(events)
+```
+
+## Re-run The Existing Views On The Inferred Timeline
+
+```elixir
+%{
+  timeline: MissingEpochs.CosmicTimeline.project(inferred_events),
+  causality: MissingEpochs.CausalityGraph.project(inferred_events),
+  replay: MissingEpochs.Replayer.replay(inferred_events)
+}
 ```

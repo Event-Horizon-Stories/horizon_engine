@@ -8,6 +8,7 @@ defmodule PreOriginModel.GapScanner do
 
     ticks
     |> Enum.sort()
+    |> Enum.uniq()
     |> Enum.chunk_every(2, 1, :discard)
     |> Enum.flat_map(fn [left, right] ->
       if right - left > 1 do

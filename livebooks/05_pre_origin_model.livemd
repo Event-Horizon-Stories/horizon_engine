@@ -17,17 +17,19 @@ events = PreOriginModel.sample_trace()
 ## Inspect The Gap And Dependency Layers
 
 ```elixir
+inferred_events = PreOriginModel.InferenceProjector.project(events)
+
 %{
   gaps: PreOriginModel.GapScanner.project(events),
-  inferred: PreOriginModel.InferenceProjector.project(events),
-  dependencies: PreOriginModel.DependencyAnalyzer.project(events)
+  inferred: inferred_events,
+  dependencies: PreOriginModel.DependencyAnalyzer.project(inferred_events)
 }
 ```
 
 ## Complete The Trace
 
 ```elixir
-completed_events = PreOriginModel.HorizonCompleter.complete(events)
+completed_events = PreOriginModel.HorizonCompleter.complete(inferred_events)
 ```
 
 ## Reinterpret The Beginning

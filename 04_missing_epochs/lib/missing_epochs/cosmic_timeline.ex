@@ -19,6 +19,9 @@ defmodule MissingEpochs.CosmicTimeline do
   defp focus(%{type: :particle_emitted, attributes: %{particle: particle}}),
     do: "particle #{particle}"
 
+  defp focus(%{type: :inferred_missing_event, attributes: %{classification: classification}}),
+    do: "gap #{classification}"
+
   defp focus(%{type: :structure_seeded, attributes: %{region: region}}), do: "region #{region}"
   defp focus(%{type: :signal_lost, attributes: %{sensor: sensor}}), do: "sensor #{sensor}"
   defp focus(_event), do: "unknown"

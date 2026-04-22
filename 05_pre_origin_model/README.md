@@ -122,7 +122,11 @@ iex -S mix
 
 ```elixir
 events = PreOriginModel.sample_trace()
-completed = PreOriginModel.HorizonCompleter.complete(events)
+completed =
+  events
+  |> PreOriginModel.InferenceProjector.project()
+  |> PreOriginModel.HorizonCompleter.complete()
+
 PreOriginModel.PreOriginProjection.project(completed)
 ```
 
@@ -131,7 +135,7 @@ PreOriginModel.PreOriginProjection.project(completed)
 The test in [`test/pre_origin_model_test.exs`](./test/pre_origin_model_test.exs) proves the final move:
 
 - the engine can append a new pre-origin anchor event
-- the gap and projection layers from earlier lessons still work
+- the gap and projection layers from earlier lessons still work on the same completed timeline
 - the meaning of the beginning changes without rewriting any earlier event
 
 That is the deepest event-sourcing turn in the series.

@@ -11,7 +11,7 @@ defmodule MissingEpochs.Replayer do
       events_at_tick = Map.fetch!(grouped, tick)
 
       for candidate <- candidate_timelines do
-        candidate ++ Enum.sort_by(events_at_tick, & &1.sequence)
+        candidate ++ Enum.sort_by(events_at_tick, &Map.get(&1, :sequence, -1))
       end
     end)
     |> Enum.map(&Enum.map(&1, fn event -> %{tick: event.tick, type: event.type} end))

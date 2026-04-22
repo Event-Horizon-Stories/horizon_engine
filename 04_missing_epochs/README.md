@@ -93,11 +93,11 @@ defmodule MissingEpochs.InferenceProjector do
     inferred_events =
       events
       |> GapScanner.project()
+      |> Enum.with_index(length(events))
       |> Enum.flat_map(&expand_gap(&1, events))
 
     (events ++ inferred_events)
-    |> Enum.sort_by(fn event -> {event.tick, inferred_rank(event)} end)
-    |> Enum.map(&normalize/1)
+    |> Enum.sort_by(fn event -> {event.tick, inferred_rank(event), Map.get(event, :sequence, -1)} end)
   end
 end
 ```
@@ -117,8 +117,11 @@ iex -S mix
 
 ```elixir
 events = MissingEpochs.sample_trace()
+inferred_events = MissingEpochs.InferenceProjector.project(events)
+
 MissingEpochs.GapScanner.project(events)
-MissingEpochs.InferenceProjector.project(events)
+MissingEpochs.CosmicTimeline.project(inferred_events)
+MissingEpochs.Replayer.replay(inferred_events)
 ```
 
 ## What the Tests Prove
@@ -126,7 +129,7 @@ MissingEpochs.InferenceProjector.project(events)
 The test in [`test/missing_epochs_test.exs`](./test/missing_epochs_test.exs) proves two things:
 
 - the new gap layer can distinguish between plausible silence and likely erasure
-- the earlier projections and replay layer still remain useful on the same trace
+- the earlier projections and replay layer still remain useful on the inferred timeline
 
 That matters because the reader can see uncertainty become part of the model instead of a reason to throw the model away.
 

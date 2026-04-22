@@ -21,30 +21,34 @@ defmodule PreOriginModelTest do
              %{from_tick: 2, to_tick: 3}
            ]
 
-    assert InferenceProjector.project(events) == [
-             %{tick: 0, type: :fluctuation_detected},
-             %{tick: 1, type: :particle_emitted},
-             %{tick: 2, type: :inferred_missing_event, classification: :silence_possible},
-             %{tick: 3, type: :inferred_missing_event, classification: :erasure_suspected},
-             %{tick: 4, type: :structure_seeded},
-             %{tick: 5, type: :signal_lost}
-           ]
+    inferred_events = InferenceProjector.project(events)
 
-    assert StructureEmergence.project(events) == %{
+    assert StructureEmergence.project(inferred_events) == %{
              first_structure_tick: 4,
              structures: [
                %{tick: 4, region: "helix-veil", classification: "proto-well"}
              ]
            }
 
-    assert DependencyAnalyzer.project(events) == [
+    assert Enum.map(inferred_events, fn event ->
+             {event.tick, event.type, get_in(event, [:attributes, :classification])}
+           end) == [
+             {0, :fluctuation_detected, nil},
+             {1, :particle_emitted, nil},
+             {2, :inferred_missing_event, :silence_possible},
+             {3, :inferred_missing_event, :erasure_suspected},
+             {4, :structure_seeded, nil},
+             {5, :signal_lost, nil}
+           ]
+
+    assert DependencyAnalyzer.project(inferred_events) == [
              %{event_id: "e2", missing_dependency: "anchor-0", before_tick: 1}
            ]
 
-    completed_events = HorizonCompleter.complete(events)
+    completed_events = HorizonCompleter.complete(inferred_events)
 
     assert List.last(completed_events) == %{
-             sequence: 4,
+             sequence: 6,
              tick: -1,
              type: :pre_origin_anchor_inferred,
              attributes: %{
@@ -58,6 +62,8 @@ defmodule PreOriginModelTest do
              %{tick: -1, type: :pre_origin_anchor_inferred, focus: "anchor anchor-0"},
              %{tick: 0, type: :fluctuation_detected, focus: "sensor cmb-array"},
              %{tick: 1, type: :particle_emitted, focus: "particle matter-seed"},
+             %{tick: 2, type: :inferred_missing_event, focus: "gap silence_possible"},
+             %{tick: 3, type: :inferred_missing_event, focus: "gap erasure_suspected"},
              %{tick: 4, type: :structure_seeded, focus: "region helix-veil"},
              %{tick: 5, type: :signal_lost, focus: "sensor deep-orbit"}
            ]
@@ -65,6 +71,8 @@ defmodule PreOriginModelTest do
     assert CausalityGraph.project(completed_events) == %{
              "e1" => [],
              "e2" => ["anchor-0"],
+             "gap-2" => [],
+             "gap-3" => [],
              "e3" => ["e2"],
              "e4" => ["e3"],
              "anchor-0" => []
@@ -76,9 +84,13 @@ defmodule PreOriginModelTest do
            ]
 
     assert UniverseSnapshot.project(completed_events) == %{
-             event_count: 5,
+             event_count: 7,
              first_light?: true,
              structure_possible?: true,
+             last_observed_sequence: 6,
+             anomaly_count: 2,
+             contradiction_count: 0,
+             gap_count: 0,
              pre_origin_anchor_count: 1
            }
 
@@ -87,6 +99,8 @@ defmodule PreOriginModelTest do
                %{tick: -1, type: :pre_origin_anchor_inferred},
                %{tick: 0, type: :fluctuation_detected},
                %{tick: 1, type: :particle_emitted},
+               %{tick: 2, type: :inferred_missing_event},
+               %{tick: 3, type: :inferred_missing_event},
                %{tick: 4, type: :structure_seeded},
                %{tick: 5, type: :signal_lost}
              ]
@@ -101,6 +115,8 @@ defmodule PreOriginModelTest do
                %{tick: -1, type: :pre_origin_anchor_inferred},
                %{tick: 0, type: :fluctuation_detected},
                %{tick: 1, type: :particle_emitted},
+               %{tick: 2, type: :inferred_missing_event},
+               %{tick: 3, type: :inferred_missing_event},
                %{tick: 4, type: :structure_seeded},
                %{tick: 5, type: :signal_lost}
              ]

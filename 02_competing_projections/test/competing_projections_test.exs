@@ -44,6 +44,7 @@ defmodule CompetingProjectionsTest do
              event_count: 6,
              first_light?: true,
              structure_possible?: true,
+             last_observed_sequence: 5,
              anomaly_count: 2
            }
   end

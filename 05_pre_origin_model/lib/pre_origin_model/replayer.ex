@@ -6,7 +6,7 @@ defmodule PreOriginModel.Replayer do
   def replay(events) do
     [
       events
-      |> Enum.sort_by(fn event -> {event.tick, event.sequence} end)
+      |> Enum.sort_by(fn event -> {event.tick, Map.get(event, :sequence, -1)} end)
       |> Enum.map(fn event -> %{tick: event.tick, type: event.type} end)
     ]
   end
