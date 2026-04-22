@@ -6,7 +6,7 @@ That progress creates a dangerous temptation: to believe that enough projections
 
 This lesson breaks that illusion.
 
-When the operators replay the earliest surviving slice of the origin trace, the contradiction is not in the tooling. It is in the source.
+When the operators replay the earliest surviving slice of the origin trace, the contradiction is not in the tooling. It is in the source, like a crack already frozen into the glass.
 
 Interactive companion: [`../livebooks/03_first_replay.livemd`](../livebooks/03_first_replay.livemd)
 

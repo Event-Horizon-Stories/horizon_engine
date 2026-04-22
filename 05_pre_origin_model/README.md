@@ -6,7 +6,7 @@ That should be enough to stabilize the investigation.
 
 Instead, the remaining events start doing something impossible: they depend on causes that do not belong in the recovered history at all.
 
-This final lesson is where event sourcing becomes genuinely unsettling. The system does not rewrite the beginning. It appends a new event in the present that changes what the beginning means.
+This final lesson is where event sourcing becomes genuinely unsettling. The system does not rewrite the beginning. It appends a new event in the present that changes what the beginning means, as if history were waiting for one more line.
 
 Interactive companion: [`../livebooks/05_pre_origin_model.livemd`](../livebooks/05_pre_origin_model.livemd)
 

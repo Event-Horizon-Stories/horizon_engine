@@ -4,7 +4,7 @@ The Horizon Engine has already survived its first contradiction.
 
 That should have made the inquiry harder. Instead, it revealed a worse problem.
 
-Contradictions are at least visible. Gaps are harder. A contradiction tells you two things cannot both be true. A missing epoch leaves you unsure whether anything happened at all.
+Contradictions are at least visible. Gaps are harder. A contradiction tells you two things cannot both be true. A missing epoch leaves you unsure whether anything happened at all, or whether the silence itself is evidence.
 
 This lesson teaches the system how to treat absence as part of the model instead of a blank space the reader is expected to ignore.
 

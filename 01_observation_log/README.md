@@ -4,7 +4,7 @@ The Horizon Engine does not begin with a theory of creation.
 
 It begins with damaged evidence.
 
-The background radiation archive is full of patterns that look less like natural noise and more like broken telemetry. Before anyone can explain what the universe is, they first need a way to record what it appears to have done.
+The background radiation archive is full of patterns that look less like natural noise and more like broken telemetry. Before anyone can explain what the universe is, they first need a way to record what it appears to have done in the scarred light that remains.
 
 This opening lesson is intentionally small. The goal is not to explain cosmology. The goal is to establish the first event sourcing habit the rest of the series depends on.
 
@@ -148,7 +148,7 @@ The team can now store observations safely, but they can only ask one simple que
 
 what happened, in order?
 
-That is not enough to run the inquiry. They still need projections that ask different questions of the same history.
+That is not enough to run the inquiry. They still need projections that ask different questions of the same history instead of staring at one column of cold events.
 
 ## Next Lesson
 

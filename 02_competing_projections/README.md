@@ -152,7 +152,7 @@ you do not need to redesign the write side every time the read side gets smarter
 
 All of these projections still assume the recovered event order is trustworthy enough to replay cleanly.
 
-That assumption is about to fail.
+That assumption is about to fail, and it fails exactly where the inquiry most wants certainty.
 
 ## Next Lesson
 
