@@ -12,9 +12,6 @@ The Horizon Engine is built to ingest fragments of that trace and reconstruct wh
 Nothing is trusted as state.
 Everything is treated as events.
 
-Like `jido_class`, this is meant to read as one continuous journey.
-The same investigation advances one pressure point at a time, and each chapter begins with whatever the previous chapter failed to explain.
-
 ## Interactive Companions
 
 Livebook companions for the full series live in [`livebooks/`](./livebooks/README.md).
@@ -27,7 +24,7 @@ Livebook companions for the full series live in [`livebooks/`](./livebooks/READM
 
 ## The Journey
 
-Each lesson is its own standalone Mix project. The concepts advance with the plot:
+Each lesson is its own standalone Mix project, but the investigation and the event sourcing ideas advance together:
 
 1. [`01_observation_log`](./01_observation_log/README.md)
    The first raw observations enter an append-only log, and the reader learns that history is the only durable truth.
@@ -40,40 +37,71 @@ Each lesson is its own standalone Mix project. The concepts advance with the plo
 5. [`05_pre_origin_model`](./05_pre_origin_model/README.md)
    Dependencies from before the beginning emerge, and the reader learns how newly appended events can reinterpret old history.
 
-## Continuity
+## Final Inquiry Shape
 
-The chapters are not isolated examples.
+By the end of the tutorial, the Horizon Engine looks roughly like this:
 
-They follow one uninterrupted escalation:
+```text
+raw observations
+|- cosmic timeline
+|- universe snapshot
+|- structure emergence
+|- causality graph
+|- anomaly detector
+|- replay candidates
+|- inferred missing epochs
+`- pre-origin continuation model
+```
 
-- first the team learns to keep raw observations without trusting snapshots
-- then they build projections to ask richer questions of the same history
-- then replay reveals contradictions in the source
-- then gaps in the source become part of the model
-- then the beginning itself stops behaving like a beginning
+That shape is intentionally small. It is enough structure to teach the core event sourcing arc without turning the series into a giant cosmology simulator.
 
-The continuity matters because event sourcing is not just a storage pattern here. It is the storytelling device.
+The repo root only holds the series guide. Each chapter owns its own code, dependencies, and tests.
 
-## Core Premise
+## Beyond the Series
 
-The system does not store what the universe is.
-Only what it appears to have done.
+The five main chapters already cover the core event sourcing arc most readers need:
 
-That event-sourcing mental model maps directly onto the story:
+- append-only history
+- projections
+- replay
+- contradictory histories
+- inferred gaps
+- late-arriving events that reinterpret the past
 
-- events are observations
-- projections are interpretations
-- replay is discovery
-- contradictions are distributed truth problems
-- missing events are gaps in recoverable history
+There are a few natural branches that could become bonus chapters or appendices later:
 
-## Repo Shape
+- **Persistent event stores**: moving from in-memory traces to durable logs once the inquiry needs longer-lived history.
+- **Projection rebuild workflows**: rebuilding several read models after a new interpretation layer appears.
+- **Operator decisions**: accepting, rejecting, or quarantining inferred and pre-origin events.
+- **Competing engines**: letting rival reconstruction systems produce conflicting continuations from the same source trace.
 
-The repo root is only the guide. Each lesson owns its own code, tests, and README so readers can move chapter by chapter without carrying framework state from one directory to the next.
+Those are worth learning. They simply sit one layer past the story this series is trying to tell.
+
+## Tooling
+
+Each chapter is a small standalone Mix project.
+
+If `mix` is not available in your shell, configure your asdf shims first rather than prefixing each command manually.
+
+For the Livebook companions, install and run Livebook from the repo root:
+
+```bash
+mix escript.install hex livebook
+livebook server livebooks
+```
 
 ## Start Here
 
 Begin with [`01_observation_log`](./01_observation_log/README.md).
+
+That chapter introduces the central event sourcing idea:
+
+```elixir
+events = ObservationLog.EventStore.append(events, :fluctuation_detected, %{sensor: "cmb-array"})
+snapshot = ObservationLog.UniverseSnapshot.project(events)
+```
+
+Before the inquiry can interpret the universe, it first needs a history it can trust.
 
 Then run each lesson independently:
 
