@@ -4,7 +4,7 @@ This notebook keeps the earlier projections and adds replay branching when the t
 
 ```elixir
 Mix.install([
-  {:first_replay, path: "../03_first_replay"}
+  {:horizon_engine, path: "../03_first_replay"}
 ])
 ```
 

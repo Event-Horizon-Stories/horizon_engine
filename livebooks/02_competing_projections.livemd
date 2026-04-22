@@ -4,7 +4,7 @@ This notebook keeps the lesson 1 event log and adds several projections over the
 
 ```elixir
 Mix.install([
-  {:competing_projections, path: "../02_competing_projections"}
+  {:horizon_engine, path: "../02_competing_projections"}
 ])
 ```
 

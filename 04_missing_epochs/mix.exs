@@ -3,7 +3,7 @@ defmodule HorizonEngine.MixProject do
 
   def project do
     [
-      app: :missing_epochs,
+      app: :horizon_engine,
       version: "0.1.0",
       elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,

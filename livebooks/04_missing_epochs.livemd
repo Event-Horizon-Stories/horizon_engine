@@ -4,7 +4,7 @@ This notebook keeps the replay stack and adds explicit handling for gaps in the 
 
 ```elixir
 Mix.install([
-  {:missing_epochs, path: "../04_missing_epochs"}
+  {:horizon_engine, path: "../04_missing_epochs"}
 ])
 ```
 

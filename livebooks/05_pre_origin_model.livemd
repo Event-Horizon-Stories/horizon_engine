@@ -4,7 +4,7 @@ This notebook keeps the full event-sourcing stack and adds a pre-origin completi
 
 ```elixir
 Mix.install([
-  {:pre_origin_model, path: "../05_pre_origin_model"}
+  {:horizon_engine, path: "../05_pre_origin_model"}
 ])
 ```
 

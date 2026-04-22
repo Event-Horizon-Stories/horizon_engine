@@ -7,7 +7,7 @@ derive state second.
 
 ```elixir
 Mix.install([
-  {:observation_log, path: "../01_observation_log"}
+  {:horizon_engine, path: "../01_observation_log"}
 ])
 ```
 
