@@ -55,8 +55,6 @@ raw observations
 `- pre-origin continuation model
 ```
 
-That shape is intentionally small. It is enough structure to teach the core event sourcing arc without turning the series into a giant cosmology simulator.
-
 The repo root only holds the series guide. Each chapter owns its own code, dependencies, and tests.
 
 ## Beyond the Series
@@ -76,8 +74,6 @@ There are a few natural branches that could become bonus chapters or appendices 
 - **Projection rebuild workflows**: rebuilding several read models after a new interpretation layer appears.
 - **Operator decisions**: accepting, rejecting, or quarantining inferred and pre-origin events.
 - **Competing engines**: letting rival reconstruction systems produce conflicting continuations from the same source trace.
-
-Those are worth learning. They simply sit one layer past the story this series is trying to tell.
 
 ## Tooling
 

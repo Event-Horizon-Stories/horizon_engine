@@ -6,7 +6,7 @@ That should be enough to stabilize the investigation.
 
 Instead, the remaining events start doing something impossible: they depend on causes that do not belong in the recovered history at all.
 
-This final lesson is where event sourcing becomes genuinely unsettling. The system does not rewrite the beginning. It appends a new event in the present that changes what the beginning means, as if history were waiting for one more line.
+The system does not rewrite the beginning. It appends a new event in the present that changes what the beginning means, as if history were waiting for one more line.
 
 Interactive companion: [`../livebooks/05_pre_origin_model.livemd`](../livebooks/05_pre_origin_model.livemd)
 
@@ -140,21 +140,16 @@ The test in [`test/pre_origin_model_test.exs`](./test/pre_origin_model_test.exs)
 - the gap and projection layers from earlier lessons still work on the same completed timeline
 - the meaning of the beginning changes without rewriting any earlier event
 
-That is the deepest event-sourcing turn in the series.
-
 ## Why This Matters
 
 The log remains the only truth surface, but the meaning of the past is still alive.
-
-That is why event sourcing fits this story so well:
-history stays immutable while understanding keeps changing.
+History stays immutable while understanding keeps changing.
 
 ## Event Sourcing Takeaway
 
 New events can change the interpretation of old history without mutating the old records.
 
-That is the deepest event-sourcing move in the series:
-immutability and reinterpretation are not opposites. They are partners.
+Immutability and reinterpretation are not opposites. They are partners.
 
 ## What Still Hurts
 

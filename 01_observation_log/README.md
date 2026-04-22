@@ -6,8 +6,6 @@ It begins with damaged evidence.
 
 The background radiation archive is full of patterns that look less like natural noise and more like broken telemetry. Before anyone can explain what the universe is, they first need a way to record what it appears to have done in the scarred light that remains.
 
-This opening lesson is intentionally small. The goal is not to explain cosmology. The goal is to establish the first event sourcing habit the rest of the series depends on.
-
 The Horizon Engine begins with one discipline:
 
 do not store what the universe is.
@@ -55,8 +53,6 @@ We will create:
 - an append-only event store
 - a timeline projection
 - a reconstructed universe snapshot
-
-The goal is not to explain the universe yet. The goal is to establish the discipline of storing history before meaning.
 
 ## The Code
 
