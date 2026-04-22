@@ -16,6 +16,7 @@ By the end of this lesson, you should understand:
 
 - why missing history is different from empty history
 - how to represent inferred events without pretending they were observed
+- how inferred events can preserve provenance for later projections and replay
 - how later lessons can extend earlier code without replacing it
 
 ## The Story

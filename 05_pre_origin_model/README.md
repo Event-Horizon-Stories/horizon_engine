@@ -16,6 +16,7 @@ By the end of this lesson, you should understand:
 
 - how newly appended events can reinterpret old history without mutating it
 - why event sourcing allows meaning to change while records remain immutable
+- how late-arriving events extend the log instead of patching earlier records
 - how a cumulative tutorial can preserve earlier code while extending its model
 
 ## The Story

@@ -16,6 +16,7 @@ By the end of this lesson, you should understand:
 
 - how one event stream can support several read models
 - why projections are interpretations rather than truth
+- why richer read models do not require changing stored events
 - how to keep the write side stable while the read side expands
 
 ## The Story

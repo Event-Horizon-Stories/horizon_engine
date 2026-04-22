@@ -21,6 +21,7 @@ By the end of this lesson, you should understand:
 
 - why event sourcing starts with an append-only history
 - how projections reconstruct state instead of persisting it directly
+- how replayable history lets current state be rebuilt instead of patched
 - why early read models should stay simple and explicit
 
 ## The Story

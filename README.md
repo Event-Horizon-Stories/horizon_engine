@@ -1,6 +1,6 @@
 # horizon_engine
 
-`horizon_engine` teaches event sourcing through **The Origin Inquiry**, an investigation into how the universe began.
+`horizon_engine` teaches event sourcing through **The Origin Inquiry**, an investigation into how the universe began by replaying fragmentary logs.
 
 A distant civilization discovers that background radiation behaves like corrupted telemetry. The working assumption becomes unbearable:
 
@@ -27,15 +27,17 @@ Livebook companions for the full series live in [`livebooks/`](./livebooks/READM
 Each lesson is its own standalone Mix project, but the investigation and the event sourcing ideas advance together:
 
 1. [`01_observation_log`](./01_observation_log/README.md)
-   The first raw observations enter an append-only log, and the reader learns that history is the only durable truth.
+   The first raw observations enter an append-only log, and the reader learns that immutable history comes first while current state is rebuilt later.
 2. [`02_competing_projections`](./02_competing_projections/README.md)
-   Several projections read the same log and tell different stories about structure, causality, and anomalies.
+   Several projections read the same log and teach projection fan-out, read models, and the separation between stored facts and useful interpretations.
 3. [`03_first_replay`](./03_first_replay/README.md)
-   The first replay from time zero produces multiple valid timelines, and the reader learns that replay cannot invent certainty.
+   The first replay from time zero produces multiple valid timelines, and the reader learns that replay rebuilds history honestly but cannot invent certainty.
 4. [`04_missing_epochs`](./04_missing_epochs/README.md)
-   Gaps appear in the trace, and the reader learns how inferred events preserve uncertainty instead of hiding it.
+   Gaps appear in the trace, and the reader learns how inferred events preserve provenance and uncertainty instead of hiding either behind a snapshot.
 5. [`05_pre_origin_model`](./05_pre_origin_model/README.md)
-   Dependencies from before the beginning emerge, and the reader learns how newly appended events can reinterpret old history.
+   Dependencies from before the beginning emerge, and the reader learns how newly appended events can reinterpret old history without mutating it.
+
+Across five lessons, the series covers append-only history, derived state, projection fan-out, replay, branching timelines, explicit uncertainty, and late-arriving meaning.
 
 ## Final Inquiry Shape
 

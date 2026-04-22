@@ -28,4 +28,4 @@ livebook server livebooks
 
 ## Opening The Series
 
-Open any notebook from the `livebooks/` directory and work through the lessons in order.
+Open the notebook that matches the chapter you want to run. The numbered files mirror the chapter progression.

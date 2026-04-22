@@ -16,6 +16,7 @@ By the end of this lesson, you should understand:
 
 - how replay exposes uncertainty already present in the log
 - why contradictory events can produce multiple valid timelines
+- how replay rebuilds possible histories without mutating the source stream
 - how to add replay logic without discarding earlier projections
 
 ## The Story
