@@ -75,6 +75,8 @@ There are a few natural branches that could become bonus chapters or appendices 
 - **Operator decisions**: accepting, rejecting, or quarantining inferred and pre-origin events.
 - **Competing engines**: letting rival reconstruction systems produce conflicting continuations from the same source trace.
 
+If the next step is learning a production library such as `Commanded`, that should be its own series rather than another chapter here. `horizon_engine` is about the event sourcing model itself. A follow-on series can then show how a real Elixir framework turns those ideas into aggregates, commands, handlers, projectors, and durable workflows.
+
 ## Tooling
 
 Each chapter is a small standalone Mix project.
