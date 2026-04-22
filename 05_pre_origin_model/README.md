@@ -53,25 +53,26 @@ We will build:
 
 This lesson lives in:
 
-- [`lib/pre_origin_model/event_store.ex`](./lib/pre_origin_model/event_store.ex)
-- [`lib/pre_origin_model/universe_snapshot.ex`](./lib/pre_origin_model/universe_snapshot.ex)
-- [`lib/pre_origin_model/cosmic_timeline.ex`](./lib/pre_origin_model/cosmic_timeline.ex)
-- [`lib/pre_origin_model/structure_emergence.ex`](./lib/pre_origin_model/structure_emergence.ex)
-- [`lib/pre_origin_model/causality_graph.ex`](./lib/pre_origin_model/causality_graph.ex)
-- [`lib/pre_origin_model/anomaly_detector.ex`](./lib/pre_origin_model/anomaly_detector.ex)
-- [`lib/pre_origin_model/replayer.ex`](./lib/pre_origin_model/replayer.ex)
-- [`lib/pre_origin_model/contradiction_detector.ex`](./lib/pre_origin_model/contradiction_detector.ex)
-- [`lib/pre_origin_model/gap_scanner.ex`](./lib/pre_origin_model/gap_scanner.ex)
-- [`lib/pre_origin_model/inference_projector.ex`](./lib/pre_origin_model/inference_projector.ex)
-- [`lib/pre_origin_model/dependency_analyzer.ex`](./lib/pre_origin_model/dependency_analyzer.ex)
-- [`lib/pre_origin_model/horizon_completer.ex`](./lib/pre_origin_model/horizon_completer.ex)
-- [`lib/pre_origin_model/pre_origin_projection.ex`](./lib/pre_origin_model/pre_origin_projection.ex)
+- [`lib/horizon_engine.ex`](./lib/horizon_engine.ex)
+- [`lib/event_store.ex`](./lib/event_store.ex)
+- [`lib/universe_snapshot.ex`](./lib/universe_snapshot.ex)
+- [`lib/cosmic_timeline.ex`](./lib/cosmic_timeline.ex)
+- [`lib/structure_emergence.ex`](./lib/structure_emergence.ex)
+- [`lib/causality_graph.ex`](./lib/causality_graph.ex)
+- [`lib/anomaly_detector.ex`](./lib/anomaly_detector.ex)
+- [`lib/replayer.ex`](./lib/replayer.ex)
+- [`lib/contradiction_detector.ex`](./lib/contradiction_detector.ex)
+- [`lib/gap_scanner.ex`](./lib/gap_scanner.ex)
+- [`lib/inference_projector.ex`](./lib/inference_projector.ex)
+- [`lib/dependency_analyzer.ex`](./lib/dependency_analyzer.ex)
+- [`lib/horizon_completer.ex`](./lib/horizon_completer.ex)
+- [`lib/pre_origin_projection.ex`](./lib/pre_origin_projection.ex)
 - [`test/pre_origin_model_test.exs`](./test/pre_origin_model_test.exs)
 
 Core pieces:
 
 ```elixir
-defmodule PreOriginModel.DependencyAnalyzer do
+defmodule HorizonEngine.DependencyAnalyzer do
   def project(events) do
     known_ids =
       events
@@ -93,7 +94,7 @@ end
 ```
 
 ```elixir
-defmodule PreOriginModel.HorizonCompleter do
+defmodule HorizonEngine.HorizonCompleter do
   def complete(events) do
     DependencyAnalyzer.project(events)
     |> Enum.reduce(events, fn dependency, acc ->
@@ -121,13 +122,13 @@ iex -S mix
 ```
 
 ```elixir
-events = PreOriginModel.sample_trace()
+events = HorizonEngine.sample_trace()
 completed =
   events
-  |> PreOriginModel.InferenceProjector.project()
-  |> PreOriginModel.HorizonCompleter.complete()
+  |> HorizonEngine.InferenceProjector.project()
+  |> HorizonEngine.HorizonCompleter.complete()
 
-PreOriginModel.PreOriginProjection.project(completed)
+HorizonEngine.PreOriginProjection.project(completed)
 ```
 
 ## What the Tests Prove

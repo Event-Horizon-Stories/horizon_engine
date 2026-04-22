@@ -52,20 +52,21 @@ We will build:
 
 This lesson lives in:
 
-- [`lib/first_replay/event_store.ex`](./lib/first_replay/event_store.ex)
-- [`lib/first_replay/universe_snapshot.ex`](./lib/first_replay/universe_snapshot.ex)
-- [`lib/first_replay/cosmic_timeline.ex`](./lib/first_replay/cosmic_timeline.ex)
-- [`lib/first_replay/structure_emergence.ex`](./lib/first_replay/structure_emergence.ex)
-- [`lib/first_replay/causality_graph.ex`](./lib/first_replay/causality_graph.ex)
-- [`lib/first_replay/anomaly_detector.ex`](./lib/first_replay/anomaly_detector.ex)
-- [`lib/first_replay/replayer.ex`](./lib/first_replay/replayer.ex)
-- [`lib/first_replay/contradiction_detector.ex`](./lib/first_replay/contradiction_detector.ex)
+- [`lib/horizon_engine.ex`](./lib/horizon_engine.ex)
+- [`lib/event_store.ex`](./lib/event_store.ex)
+- [`lib/universe_snapshot.ex`](./lib/universe_snapshot.ex)
+- [`lib/cosmic_timeline.ex`](./lib/cosmic_timeline.ex)
+- [`lib/structure_emergence.ex`](./lib/structure_emergence.ex)
+- [`lib/causality_graph.ex`](./lib/causality_graph.ex)
+- [`lib/anomaly_detector.ex`](./lib/anomaly_detector.ex)
+- [`lib/replayer.ex`](./lib/replayer.ex)
+- [`lib/contradiction_detector.ex`](./lib/contradiction_detector.ex)
 - [`test/first_replay_test.exs`](./test/first_replay_test.exs)
 
 Core pieces:
 
 ```elixir
-defmodule FirstReplay.Replayer do
+defmodule HorizonEngine.Replayer do
   def replay(events) do
     grouped = Enum.group_by(events, & &1.tick)
     ticks = grouped |> Map.keys() |> Enum.sort()
@@ -81,7 +82,7 @@ end
 ```
 
 ```elixir
-defmodule FirstReplay.ContradictionDetector do
+defmodule HorizonEngine.ContradictionDetector do
   def project(events) do
     events
     |> Enum.group_by(& &1.tick)
@@ -114,9 +115,9 @@ iex -S mix
 ```
 
 ```elixir
-events = FirstReplay.sample_trace()
-FirstReplay.Replayer.replay(events)
-FirstReplay.ContradictionDetector.project(events)
+events = HorizonEngine.sample_trace()
+HorizonEngine.Replayer.replay(events)
+HorizonEngine.ContradictionDetector.project(events)
 ```
 
 ## What the Tests Prove

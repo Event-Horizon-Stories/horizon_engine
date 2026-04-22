@@ -57,18 +57,19 @@ All of them will read the same event stream.
 
 This lesson lives in:
 
-- [`lib/competing_projections/event_store.ex`](./lib/competing_projections/event_store.ex)
-- [`lib/competing_projections/universe_snapshot.ex`](./lib/competing_projections/universe_snapshot.ex)
-- [`lib/competing_projections/cosmic_timeline.ex`](./lib/competing_projections/cosmic_timeline.ex)
-- [`lib/competing_projections/structure_emergence.ex`](./lib/competing_projections/structure_emergence.ex)
-- [`lib/competing_projections/causality_graph.ex`](./lib/competing_projections/causality_graph.ex)
-- [`lib/competing_projections/anomaly_detector.ex`](./lib/competing_projections/anomaly_detector.ex)
+- [`lib/horizon_engine.ex`](./lib/horizon_engine.ex)
+- [`lib/event_store.ex`](./lib/event_store.ex)
+- [`lib/universe_snapshot.ex`](./lib/universe_snapshot.ex)
+- [`lib/cosmic_timeline.ex`](./lib/cosmic_timeline.ex)
+- [`lib/structure_emergence.ex`](./lib/structure_emergence.ex)
+- [`lib/causality_graph.ex`](./lib/causality_graph.ex)
+- [`lib/anomaly_detector.ex`](./lib/anomaly_detector.ex)
 - [`test/competing_projections_test.exs`](./test/competing_projections_test.exs)
 
 Core pieces:
 
 ```elixir
-defmodule CompetingProjections.StructureEmergence do
+defmodule HorizonEngine.StructureEmergence do
   def project(events) do
     structures =
       events
@@ -91,7 +92,7 @@ end
 ```
 
 ```elixir
-defmodule CompetingProjections.CausalityGraph do
+defmodule HorizonEngine.CausalityGraph do
   def project(events) do
     Map.new(events, fn event ->
       id = get_in(event, [:attributes, :id])
@@ -116,10 +117,10 @@ iex -S mix
 ```
 
 ```elixir
-events = CompetingProjections.sample_trace()
-CompetingProjections.UniverseSnapshot.project(events)
-CompetingProjections.StructureEmergence.project(events)
-CompetingProjections.AnomalyDetector.project(events)
+events = HorizonEngine.sample_trace()
+HorizonEngine.UniverseSnapshot.project(events)
+HorizonEngine.StructureEmergence.project(events)
+HorizonEngine.AnomalyDetector.project(events)
 ```
 
 ## What the Tests Prove

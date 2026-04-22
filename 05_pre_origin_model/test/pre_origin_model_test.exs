@@ -1,21 +1,21 @@
 defmodule PreOriginModelTest do
   use ExUnit.Case
 
-  alias PreOriginModel.AnomalyDetector
-  alias PreOriginModel.CausalityGraph
-  alias PreOriginModel.ContradictionDetector
-  alias PreOriginModel.CosmicTimeline
-  alias PreOriginModel.DependencyAnalyzer
-  alias PreOriginModel.GapScanner
-  alias PreOriginModel.HorizonCompleter
-  alias PreOriginModel.InferenceProjector
-  alias PreOriginModel.PreOriginProjection
-  alias PreOriginModel.Replayer
-  alias PreOriginModel.StructureEmergence
-  alias PreOriginModel.UniverseSnapshot
+  alias HorizonEngine.AnomalyDetector
+  alias HorizonEngine.CausalityGraph
+  alias HorizonEngine.ContradictionDetector
+  alias HorizonEngine.CosmicTimeline
+  alias HorizonEngine.DependencyAnalyzer
+  alias HorizonEngine.GapScanner
+  alias HorizonEngine.HorizonCompleter
+  alias HorizonEngine.InferenceProjector
+  alias HorizonEngine.PreOriginProjection
+  alias HorizonEngine.Replayer
+  alias HorizonEngine.StructureEmergence
+  alias HorizonEngine.UniverseSnapshot
 
   test "the engine starts appending events that seem to belong before the beginning" do
-    events = PreOriginModel.sample_trace()
+    events = HorizonEngine.sample_trace()
 
     assert GapScanner.project(events) == [
              %{from_tick: 2, to_tick: 3}

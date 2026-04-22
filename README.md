@@ -97,8 +97,8 @@ Begin with [`01_observation_log`](./01_observation_log/README.md).
 That chapter introduces the central event sourcing idea:
 
 ```elixir
-events = ObservationLog.EventStore.append(events, :fluctuation_detected, %{sensor: "cmb-array"})
-snapshot = ObservationLog.UniverseSnapshot.project(events)
+events = HorizonEngine.EventStore.append(events, :fluctuation_detected, %{sensor: "cmb-array"})
+snapshot = HorizonEngine.UniverseSnapshot.project(events)
 ```
 
 Before the inquiry can interpret the universe, it first needs a history it can trust.

@@ -1,16 +1,16 @@
 defmodule FirstReplayTest do
   use ExUnit.Case
 
-  alias FirstReplay.AnomalyDetector
-  alias FirstReplay.CausalityGraph
-  alias FirstReplay.ContradictionDetector
-  alias FirstReplay.CosmicTimeline
-  alias FirstReplay.Replayer
-  alias FirstReplay.StructureEmergence
-  alias FirstReplay.UniverseSnapshot
+  alias HorizonEngine.AnomalyDetector
+  alias HorizonEngine.CausalityGraph
+  alias HorizonEngine.ContradictionDetector
+  alias HorizonEngine.CosmicTimeline
+  alias HorizonEngine.Replayer
+  alias HorizonEngine.StructureEmergence
+  alias HorizonEngine.UniverseSnapshot
 
   test "replaying from time zero can yield multiple valid timelines" do
-    events = FirstReplay.sample_trace()
+    events = HorizonEngine.sample_trace()
 
     assert CosmicTimeline.project(events) == [
              %{tick: 0, type: :fluctuation_detected, focus: "sensor cmb-array"},

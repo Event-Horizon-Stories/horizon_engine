@@ -1,14 +1,14 @@
 defmodule CompetingProjectionsTest do
   use ExUnit.Case
 
-  alias CompetingProjections.AnomalyDetector
-  alias CompetingProjections.CausalityGraph
-  alias CompetingProjections.CosmicTimeline
-  alias CompetingProjections.StructureEmergence
-  alias CompetingProjections.UniverseSnapshot
+  alias HorizonEngine.AnomalyDetector
+  alias HorizonEngine.CausalityGraph
+  alias HorizonEngine.CosmicTimeline
+  alias HorizonEngine.StructureEmergence
+  alias HorizonEngine.UniverseSnapshot
 
   test "different projections tell different stories about the same universe" do
-    events = CompetingProjections.sample_trace()
+    events = HorizonEngine.sample_trace()
 
     assert CosmicTimeline.project(events) == [
              %{sequence: 0, type: :symmetry_broken, focus: "field inflation-band"},

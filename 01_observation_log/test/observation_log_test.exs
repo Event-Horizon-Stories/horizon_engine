@@ -1,9 +1,9 @@
 defmodule ObservationLogTest do
   use ExUnit.Case
 
-  alias ObservationLog.CosmicTimeline
-  alias ObservationLog.EventStore
-  alias ObservationLog.UniverseSnapshot
+  alias HorizonEngine.CosmicTimeline
+  alias HorizonEngine.EventStore
+  alias HorizonEngine.UniverseSnapshot
 
   test "the universe is reconstructed from an append-only log" do
     events =

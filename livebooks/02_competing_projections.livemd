@@ -11,23 +11,23 @@ Mix.install([
 ## Load The Shared Trace
 
 ```elixir
-events = CompetingProjections.sample_trace()
+events = HorizonEngine.sample_trace()
 ```
 
 ## Compare The Projections
 
 ```elixir
 %{
-  snapshot: CompetingProjections.UniverseSnapshot.project(events),
-  timeline: CompetingProjections.CosmicTimeline.project(events),
-  structure: CompetingProjections.StructureEmergence.project(events),
-  causality: CompetingProjections.CausalityGraph.project(events),
-  anomalies: CompetingProjections.AnomalyDetector.project(events)
+  snapshot: HorizonEngine.UniverseSnapshot.project(events),
+  timeline: HorizonEngine.CosmicTimeline.project(events),
+  structure: HorizonEngine.StructureEmergence.project(events),
+  causality: HorizonEngine.CausalityGraph.project(events),
+  anomalies: HorizonEngine.AnomalyDetector.project(events)
 }
 ```
 
 ## Focus On The Anomalies
 
 ```elixir
-CompetingProjections.AnomalyDetector.project(events)
+HorizonEngine.AnomalyDetector.project(events)
 ```

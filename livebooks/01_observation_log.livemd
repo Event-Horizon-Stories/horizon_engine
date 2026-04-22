@@ -14,33 +14,33 @@ Mix.install([
 ## Load The First Trace
 
 ```elixir
-events = ObservationLog.sample_trace()
+events = HorizonEngine.sample_trace()
 ```
 
 ## Project A Timeline
 
 ```elixir
-ObservationLog.CosmicTimeline.project(events)
+HorizonEngine.CosmicTimeline.project(events)
 ```
 
 ## Project A Snapshot
 
 ```elixir
-ObservationLog.UniverseSnapshot.project(events)
+HorizonEngine.UniverseSnapshot.project(events)
 ```
 
 ## Append One More Observation
 
 ```elixir
 expanded_events =
-  ObservationLog.EventStore.append(
+  HorizonEngine.EventStore.append(
     events,
     :particle_emitted,
     %{particle: "echo-seed", energy: 21}
   )
 
 %{
-  timeline: ObservationLog.CosmicTimeline.project(expanded_events),
-  snapshot: ObservationLog.UniverseSnapshot.project(expanded_events)
+  timeline: HorizonEngine.CosmicTimeline.project(expanded_events),
+  snapshot: HorizonEngine.UniverseSnapshot.project(expanded_events)
 }
 ```

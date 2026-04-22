@@ -1,18 +1,18 @@
 defmodule MissingEpochsTest do
   use ExUnit.Case
 
-  alias MissingEpochs.AnomalyDetector
-  alias MissingEpochs.CausalityGraph
-  alias MissingEpochs.ContradictionDetector
-  alias MissingEpochs.CosmicTimeline
-  alias MissingEpochs.GapScanner
-  alias MissingEpochs.InferenceProjector
-  alias MissingEpochs.Replayer
-  alias MissingEpochs.StructureEmergence
-  alias MissingEpochs.UniverseSnapshot
+  alias HorizonEngine.AnomalyDetector
+  alias HorizonEngine.CausalityGraph
+  alias HorizonEngine.ContradictionDetector
+  alias HorizonEngine.CosmicTimeline
+  alias HorizonEngine.GapScanner
+  alias HorizonEngine.InferenceProjector
+  alias HorizonEngine.Replayer
+  alias HorizonEngine.StructureEmergence
+  alias HorizonEngine.UniverseSnapshot
 
   test "gaps in the trace become explicit interpretation problems" do
-    events = MissingEpochs.sample_trace()
+    events = HorizonEngine.sample_trace()
 
     assert GapScanner.project(events) == [
              %{from_tick: 2, to_tick: 3}

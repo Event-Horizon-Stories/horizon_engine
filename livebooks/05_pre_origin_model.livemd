@@ -11,34 +11,34 @@ Mix.install([
 ## Load The Final Trace
 
 ```elixir
-events = PreOriginModel.sample_trace()
+events = HorizonEngine.sample_trace()
 ```
 
 ## Inspect The Gap And Dependency Layers
 
 ```elixir
-inferred_events = PreOriginModel.InferenceProjector.project(events)
+inferred_events = HorizonEngine.InferenceProjector.project(events)
 
 %{
-  gaps: PreOriginModel.GapScanner.project(events),
+  gaps: HorizonEngine.GapScanner.project(events),
   inferred: inferred_events,
-  dependencies: PreOriginModel.DependencyAnalyzer.project(inferred_events)
+  dependencies: HorizonEngine.DependencyAnalyzer.project(inferred_events)
 }
 ```
 
 ## Complete The Trace
 
 ```elixir
-completed_events = PreOriginModel.HorizonCompleter.complete(inferred_events)
+completed_events = HorizonEngine.HorizonCompleter.complete(inferred_events)
 ```
 
 ## Reinterpret The Beginning
 
 ```elixir
 %{
-  timeline: PreOriginModel.CosmicTimeline.project(completed_events),
-  replay: PreOriginModel.Replayer.replay(completed_events),
-  anomalies: PreOriginModel.AnomalyDetector.project(completed_events),
-  pre_origin: PreOriginModel.PreOriginProjection.project(completed_events)
+  timeline: HorizonEngine.CosmicTimeline.project(completed_events),
+  replay: HorizonEngine.Replayer.replay(completed_events),
+  anomalies: HorizonEngine.AnomalyDetector.project(completed_events),
+  pre_origin: HorizonEngine.PreOriginProjection.project(completed_events)
 }
 ```

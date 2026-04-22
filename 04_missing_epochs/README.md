@@ -54,22 +54,23 @@ We will build:
 
 This lesson lives in:
 
-- [`lib/missing_epochs/event_store.ex`](./lib/missing_epochs/event_store.ex)
-- [`lib/missing_epochs/universe_snapshot.ex`](./lib/missing_epochs/universe_snapshot.ex)
-- [`lib/missing_epochs/cosmic_timeline.ex`](./lib/missing_epochs/cosmic_timeline.ex)
-- [`lib/missing_epochs/structure_emergence.ex`](./lib/missing_epochs/structure_emergence.ex)
-- [`lib/missing_epochs/causality_graph.ex`](./lib/missing_epochs/causality_graph.ex)
-- [`lib/missing_epochs/anomaly_detector.ex`](./lib/missing_epochs/anomaly_detector.ex)
-- [`lib/missing_epochs/replayer.ex`](./lib/missing_epochs/replayer.ex)
-- [`lib/missing_epochs/contradiction_detector.ex`](./lib/missing_epochs/contradiction_detector.ex)
-- [`lib/missing_epochs/gap_scanner.ex`](./lib/missing_epochs/gap_scanner.ex)
-- [`lib/missing_epochs/inference_projector.ex`](./lib/missing_epochs/inference_projector.ex)
+- [`lib/horizon_engine.ex`](./lib/horizon_engine.ex)
+- [`lib/event_store.ex`](./lib/event_store.ex)
+- [`lib/universe_snapshot.ex`](./lib/universe_snapshot.ex)
+- [`lib/cosmic_timeline.ex`](./lib/cosmic_timeline.ex)
+- [`lib/structure_emergence.ex`](./lib/structure_emergence.ex)
+- [`lib/causality_graph.ex`](./lib/causality_graph.ex)
+- [`lib/anomaly_detector.ex`](./lib/anomaly_detector.ex)
+- [`lib/replayer.ex`](./lib/replayer.ex)
+- [`lib/contradiction_detector.ex`](./lib/contradiction_detector.ex)
+- [`lib/gap_scanner.ex`](./lib/gap_scanner.ex)
+- [`lib/inference_projector.ex`](./lib/inference_projector.ex)
 - [`test/missing_epochs_test.exs`](./test/missing_epochs_test.exs)
 
 Core pieces:
 
 ```elixir
-defmodule MissingEpochs.GapScanner do
+defmodule HorizonEngine.GapScanner do
   def project(events) do
     ticks = Enum.map(events, & &1.tick)
 
@@ -88,7 +89,7 @@ end
 ```
 
 ```elixir
-defmodule MissingEpochs.InferenceProjector do
+defmodule HorizonEngine.InferenceProjector do
   def project(events) do
     inferred_events =
       events
@@ -116,12 +117,12 @@ iex -S mix
 ```
 
 ```elixir
-events = MissingEpochs.sample_trace()
-inferred_events = MissingEpochs.InferenceProjector.project(events)
+events = HorizonEngine.sample_trace()
+inferred_events = HorizonEngine.InferenceProjector.project(events)
 
-MissingEpochs.GapScanner.project(events)
-MissingEpochs.CosmicTimeline.project(inferred_events)
-MissingEpochs.Replayer.replay(inferred_events)
+HorizonEngine.GapScanner.project(events)
+HorizonEngine.CosmicTimeline.project(inferred_events)
+HorizonEngine.Replayer.replay(inferred_events)
 ```
 
 ## What the Tests Prove

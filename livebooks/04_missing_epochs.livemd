@@ -11,38 +11,38 @@ Mix.install([
 ## Load The Gapped Trace
 
 ```elixir
-events = MissingEpochs.sample_trace()
+events = HorizonEngine.sample_trace()
 ```
 
 ## Inspect The Existing Views
 
 ```elixir
 %{
-  timeline: MissingEpochs.CosmicTimeline.project(events),
-  structure: MissingEpochs.StructureEmergence.project(events),
-  causality: MissingEpochs.CausalityGraph.project(events),
-  replay: MissingEpochs.Replayer.replay(events)
+  timeline: HorizonEngine.CosmicTimeline.project(events),
+  structure: HorizonEngine.StructureEmergence.project(events),
+  causality: HorizonEngine.CausalityGraph.project(events),
+  replay: HorizonEngine.Replayer.replay(events)
 }
 ```
 
 ## Detect The Gaps
 
 ```elixir
-MissingEpochs.GapScanner.project(events)
+HorizonEngine.GapScanner.project(events)
 ```
 
 ## Project Inferred Missing Events
 
 ```elixir
-inferred_events = MissingEpochs.InferenceProjector.project(events)
+inferred_events = HorizonEngine.InferenceProjector.project(events)
 ```
 
 ## Re-run The Existing Views On The Inferred Timeline
 
 ```elixir
 %{
-  timeline: MissingEpochs.CosmicTimeline.project(inferred_events),
-  causality: MissingEpochs.CausalityGraph.project(inferred_events),
-  replay: MissingEpochs.Replayer.replay(inferred_events)
+  timeline: HorizonEngine.CosmicTimeline.project(inferred_events),
+  causality: HorizonEngine.CausalityGraph.project(inferred_events),
+  replay: HorizonEngine.Replayer.replay(inferred_events)
 }
 ```

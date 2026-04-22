@@ -1,4 +1,4 @@
-defmodule ObservationLog.MixProject do
+defmodule HorizonEngine.MixProject do
   use Mix.Project
 
   def project do

@@ -61,15 +61,16 @@ The goal is not to explain the universe yet. The goal is to establish the discip
 
 This lesson lives in:
 
-- [`lib/observation_log/event_store.ex`](./lib/observation_log/event_store.ex)
-- [`lib/observation_log/cosmic_timeline.ex`](./lib/observation_log/cosmic_timeline.ex)
-- [`lib/observation_log/universe_snapshot.ex`](./lib/observation_log/universe_snapshot.ex)
+- [`lib/horizon_engine.ex`](./lib/horizon_engine.ex)
+- [`lib/event_store.ex`](./lib/event_store.ex)
+- [`lib/cosmic_timeline.ex`](./lib/cosmic_timeline.ex)
+- [`lib/universe_snapshot.ex`](./lib/universe_snapshot.ex)
 - [`test/observation_log_test.exs`](./test/observation_log_test.exs)
 
 Core pieces:
 
 ```elixir
-defmodule ObservationLog.EventStore do
+defmodule HorizonEngine.EventStore do
   def append(events, type, attributes, opts \\ []) when is_list(events) and is_atom(type) do
     sequence = length(events)
 
@@ -86,7 +87,7 @@ end
 ```
 
 ```elixir
-defmodule ObservationLog.UniverseSnapshot do
+defmodule HorizonEngine.UniverseSnapshot do
   def project(events) do
     %{
       event_count: length(events),
@@ -112,9 +113,9 @@ iex -S mix
 ```
 
 ```elixir
-events = ObservationLog.sample_trace()
-ObservationLog.CosmicTimeline.project(events)
-ObservationLog.UniverseSnapshot.project(events)
+events = HorizonEngine.sample_trace()
+HorizonEngine.CosmicTimeline.project(events)
+HorizonEngine.UniverseSnapshot.project(events)
 ```
 
 ## What the Tests Prove

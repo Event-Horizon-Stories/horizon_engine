@@ -11,29 +11,29 @@ Mix.install([
 ## Load The Contradictory Trace
 
 ```elixir
-events = FirstReplay.sample_trace()
+events = HorizonEngine.sample_trace()
 ```
 
 ## Inspect The Older Projections
 
 ```elixir
 %{
-  snapshot: FirstReplay.UniverseSnapshot.project(events),
-  timeline: FirstReplay.CosmicTimeline.project(events),
-  structure: FirstReplay.StructureEmergence.project(events),
-  causality: FirstReplay.CausalityGraph.project(events),
-  anomalies: FirstReplay.AnomalyDetector.project(events)
+  snapshot: HorizonEngine.UniverseSnapshot.project(events),
+  timeline: HorizonEngine.CosmicTimeline.project(events),
+  structure: HorizonEngine.StructureEmergence.project(events),
+  causality: HorizonEngine.CausalityGraph.project(events),
+  anomalies: HorizonEngine.AnomalyDetector.project(events)
 }
 ```
 
 ## Replay The Origin Candidates
 
 ```elixir
-FirstReplay.Replayer.replay(events)
+HorizonEngine.Replayer.replay(events)
 ```
 
 ## Detect The Contradiction
 
 ```elixir
-FirstReplay.ContradictionDetector.project(events)
+HorizonEngine.ContradictionDetector.project(events)
 ```
