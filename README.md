@@ -94,17 +94,21 @@ livebook server livebooks
 
 `horizon_engine` is the farthest-forward story in the current shared timeline.
 
-It reads cleanly as a remote descendant of the colony, network, trade, and
-wormhole-era histories explored in
+It reads cleanly as a remote descendant of the colony, fleet, network,
+dispatch, trade, and wormhole-era histories explored in
 [`mars_colony_otp`](https://github.com/Event-Horizon-Stories/mars_colony_otp),
+[`helios_fleet`](https://github.com/Event-Horizon-Stories/helios_fleet),
 [`signal_network`](https://github.com/Event-Horizon-Stories/signal_network),
+[`orbital_dispatch`](https://github.com/Event-Horizon-Stories/orbital_dispatch),
 [`galactic_trade_authority`](https://github.com/Event-Horizon-Stories/galactic_trade_authority), and
 [`wormhole_protocol`](https://github.com/Event-Horizon-Stories/wormhole_protocol).
 
 ## Related Stories
 
 - Early colony era: [`mars_colony_otp`](https://github.com/Event-Horizon-Stories/mars_colony_otp)
+- Fleet autonomy era: [`helios_fleet`](https://github.com/Event-Horizon-Stories/helios_fleet)
 - Interplanetary network era: [`signal_network`](https://github.com/Event-Horizon-Stories/signal_network)
+- Dispatch era: [`orbital_dispatch`](https://github.com/Event-Horizon-Stories/orbital_dispatch)
 - Trade authority era: [`galactic_trade_authority`](https://github.com/Event-Horizon-Stories/galactic_trade_authority)
 - Wormhole era: [`wormhole_protocol`](https://github.com/Event-Horizon-Stories/wormhole_protocol)
 
