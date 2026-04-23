@@ -90,6 +90,24 @@ mix escript.install hex livebook
 livebook server livebooks
 ```
 
+## Timeline
+
+`horizon_engine` is the farthest-forward story in the current shared timeline.
+
+It reads cleanly as a remote descendant of the colony, network, trade, and
+wormhole-era histories explored in
+[`mars_colony_otp`](https://github.com/Event-Horizon-Stories/mars_colony_otp),
+[`signal_network`](https://github.com/Event-Horizon-Stories/signal_network),
+[`galactic_trade_authority`](https://github.com/Event-Horizon-Stories/galactic_trade_authority), and
+[`wormhole_protocol`](https://github.com/Event-Horizon-Stories/wormhole_protocol).
+
+## Related Stories
+
+- Early colony era: [`mars_colony_otp`](https://github.com/Event-Horizon-Stories/mars_colony_otp)
+- Interplanetary network era: [`signal_network`](https://github.com/Event-Horizon-Stories/signal_network)
+- Trade authority era: [`galactic_trade_authority`](https://github.com/Event-Horizon-Stories/galactic_trade_authority)
+- Wormhole era: [`wormhole_protocol`](https://github.com/Event-Horizon-Stories/wormhole_protocol)
+
 ## Start Here
 
 Begin with [`01_observation_log`](./01_observation_log/README.md).
